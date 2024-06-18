@@ -33,13 +33,13 @@ public struct AllowedHostsMiddleware: AsyncMiddleware {
     ///   - next: Next `Responder` in the chain, potentially another middleware or the main router.
     /// - Returns: allowed response with a correct IP address
     public func respond(to request: Request, chainingTo next: AsyncResponder) async throws -> Response {
-        request.logger.debug("INFO: ipAddress headers - \(String(describing: request.headers))")
+        request.logger.debug("IpAddress headers - \(String(describing: request.headers))")
         guard let ipAddress = request.remoteAddress?.ipAddress else {
-            request.application.logger.error("ERROR: Access attempt without an authorized IP address")
+            request.application.logger.error("Access attempt without an authorized IP address")
             throw HostError.notAcceptable
         }
         if !request.application.allowedHosts.contains(ipAddress) {
-            request.application.logger.error("ERROR: Unauthorized access attempt from IP address: \(ipAddress)")
+            request.application.logger.error("Unauthorized access attempt from IP address: \(ipAddress)")
             throw HostError.unauthorizedAccessAttempt(ipAddress: ipAddress)
         }
         return try await next.respond(to: request)

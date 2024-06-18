@@ -23,9 +23,8 @@
 //
 
 import Vapor
-import FSErrorMiddleware
 
-public enum HostError: AppError {
+public enum HostError: AbortError, DebuggableError {
     case notAcceptable
     case unauthorizedAccessAttempt(ipAddress: String)
 

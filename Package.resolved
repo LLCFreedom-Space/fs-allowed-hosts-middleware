@@ -1,13 +1,13 @@
 {
-  "originHash" : "23dd334b87e1899ed7a998db275ef61a77e75ef3938db6cddddfa1cbbb2f553f",
+  "originHash" : "fb7760c9f9b85fd1005cf43bafbda8b73fb74fdb1a5a27f17abdc4c2ee96bf16",
   "pins" : [
     {
       "identity" : "async-http-client",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/swift-server/async-http-client.git",
       "state" : {
-        "revision" : "a22083713ee90808d527d0baa290c2fb13ca3096",
-        "version" : "1.21.1"
+        "revision" : "0ae99db85b2b9d1e79b362bd31fd1ffe492f7c47",
+        "version" : "1.21.2"
       }
     },
     {
@@ -26,33 +26,6 @@
       "state" : {
         "revision" : "9f7932f22ab6f64aafadc14491e694179b7d0f6f",
         "version" : "4.14.3"
-      }
-    },
-    {
-      "identity" : "fs-error-middleware",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/LLCFreedom-Space/fs-error-middleware.git",
-      "state" : {
-        "revision" : "0a98a7923998ced3db9f831b2d2abf128f283e6c",
-        "version" : "1.1.0"
-      }
-    },
-    {
-      "identity" : "jwt",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/vapor/jwt.git",
-      "state" : {
-        "revision" : "d65f32bfd08fae5910d603028be5dec4f35b3482",
-        "version" : "4.2.2"
-      }
-    },
-    {
-      "identity" : "jwt-kit",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/vapor/jwt-kit.git",
-      "state" : {
-        "revision" : "c2595b9ad7f512d7f334830b4df1fed6e917946a",
-        "version" : "4.13.4"
       }
     },
     {
@@ -141,8 +114,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/apple/swift-nio.git",
       "state" : {
-        "revision" : "9428f62793696d9a0cc1f26a63f63bb31da0516d",
-        "version" : "2.66.0"
+        "revision" : "e5a216ba89deba84356bad9d4c2eab99071c745b",
+        "version" : "2.67.0"
       }
     },
     {
@@ -204,8 +177,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/vapor/vapor.git",
       "state" : {
-        "revision" : "f1c3495b5c35ab67881412acf20144112729b560",
-        "version" : "4.101.3"
+        "revision" : "4b2bce9cfb93fe03e143e5bda82d017b584b3ccf",
+        "version" : "4.101.4"
       }
     },
     {
