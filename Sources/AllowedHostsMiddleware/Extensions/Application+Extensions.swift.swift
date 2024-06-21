@@ -24,8 +24,11 @@
 
 import Vapor
 
+/// Extension for core type representing a Vapor application.
 extension Application {
+    /// A `AllowedHostsKey` conform to StorageKey protocol
     private struct AllowedHostsKey: StorageKey {
+        /// Less verbose typealias for `[String]`.
         typealias Value = [String]
     }
 
