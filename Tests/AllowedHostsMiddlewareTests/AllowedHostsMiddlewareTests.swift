@@ -1,7 +1,7 @@
 import XCTest
-@testable import fs_allowed_hosts_middleware
+@testable import AllowedHostsMiddleware
 
-final class fs_allowed_hosts_middlewareTests: XCTestCase {
+final class AllowedHostsMiddlewareTests: XCTestCase {
     func testExample() throws {
         // XCTest Documentation
         // https://developer.apple.com/documentation/xctest

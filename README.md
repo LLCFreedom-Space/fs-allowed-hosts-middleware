@@ -24,7 +24,7 @@ Add the `AllowedHostsMiddleware` package to the dependencies within your applica
 ```swift
 .package(url: "https://github.com/LLCFreedom-Space/fs-allowed-hosts-middleware.git", from: "x.x.x")
 ```
-Add `FSGetAppStatus` to your target's dependencies:
+Add `AllowedHostsMiddleware` to your target's dependencies:
 ```swift
 .target(name: "AllowedHostsMiddleware", dependencies: ["AllowedHostsMiddleware"]),
 ```
