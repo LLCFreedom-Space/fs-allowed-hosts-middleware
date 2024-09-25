@@ -34,7 +34,11 @@ extension Application {
 
     /// Setup `allowedHosts` in application storage
     public var allowedHosts: [String] {
-        get { storage[AllowedHostsKey.self] ?? [""] }
+        get { guard let allowedHosts = storage[AllowedHostsKey.self] else {
+            fatalError("No allowed hosts value")
+        }
+            return allowedHosts
+        }
         set { storage[AllowedHostsKey.self] = newValue }
     }
 }

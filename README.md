@@ -13,7 +13,7 @@ Quick implementation of allowed hosts middleware.
 
 ## Swift version
 
-The latest version of AllowedHostsMiddleware requires **Swift 5.8** and **MacOS v13** or later. You can download this version of the Swift binaries by following this [link](https://swift.org/download/).
+The latest version of AllowedHostsMiddleware requires **Swift 5.9** and **MacOS v13** or later. You can download this version of the Swift binaries by following this [link](https://swift.org/download/).
 
 ## Usage
 
