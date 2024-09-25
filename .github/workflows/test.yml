@@ -27,9 +27,9 @@ jobs:
       uses: sersoft-gmbh/swift-coverage-action@v4
       id: coverage-files
     - name: Publish Coverage to Codecov
-      uses: codecov/codecov-action@v3
+      uses: codecov/codecov-action@v4.0.1
       with:
-        files: ${{ join(fromJSON(steps.coverage-files.outputs.files), ',') }}
+        token: ${{ secrets.CODECOV_TOKEN }}
   linux-unit:
     runs-on: ubuntu-latest
     container: swift:jammy
