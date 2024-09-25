@@ -33,7 +33,7 @@ public enum HostError: AbortError, DebuggableError {
         case .notAcceptable:
             return .notAcceptable
         case .unauthorizedAccessAttempt:
-            return .notAcceptable
+            return .unauthorized
         }
     }
 
