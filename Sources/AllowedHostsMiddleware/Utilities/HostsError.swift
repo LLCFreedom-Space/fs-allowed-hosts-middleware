@@ -54,13 +54,4 @@ public enum HostError: AbortError, DebuggableError {
             return "unauthorized_access_attempt"
         }
     }
-
-    public var number: String {
-        switch self {
-        case .notAcceptable:
-            return "0001"
-        case .unauthorizedAccessAttempt:
-            return "0002"
-        }
-    }
 }
