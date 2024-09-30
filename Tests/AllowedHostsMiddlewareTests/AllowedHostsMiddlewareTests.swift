@@ -11,6 +11,9 @@ final class AllowedHostsMiddlewareTests: XCTestCase {
 
     override func setUp() async throws {
         app = try await Application.make(.testing)
+        app.get("order") { _ -> String in
+            return "done"
+        }
     }
 
     override func tearDown() async throws {
@@ -20,9 +23,6 @@ final class AllowedHostsMiddlewareTests: XCTestCase {
     func testSuccess() throws {
         app.middleware.use(AllowedHostsMiddleware())
         app.allowedHosts = ["127.0.0.1"]
-        app.get("order") { req -> String in
-            return "done"
-        }
         try app.testable(method: .running(hostname: "127.0.0.1", port: port)).test(.GET, "/order") { res in
             XCTAssertEqual(res.status, .ok)
             XCTAssertEqual(res.body.string, "done")
@@ -32,9 +32,6 @@ final class AllowedHostsMiddlewareTests: XCTestCase {
     func testNotAcceptable() throws {
         app.middleware.use(AllowedHostsMiddleware())
         app.allowedHosts = ["127.0.0.1"]
-        app.get("order") { req -> String in
-            return "done"
-        }
         try app.testable().test(.GET, "/order") { res in
             XCTAssertEqual(res.status, .notAcceptable)
         }
@@ -43,9 +40,6 @@ final class AllowedHostsMiddlewareTests: XCTestCase {
     func testUnauthorized() throws {
         app.middleware.use(AllowedHostsMiddleware())
         app.allowedHosts = ["example.com"]
-        app.get("order") { req -> String in
-            return "done"
-        }
         try app.testable(method: .running(hostname: "127.0.0.1", port: port)).test(.GET, "/order") { res in
             XCTAssertEqual(res.status, .unauthorized)
         }
