@@ -24,10 +24,14 @@
 
 import Vapor
 
+/// A generic `HostError` data.
 public enum HostError: AbortError, DebuggableError {
+    /// The `HostError` not acceptable
     case notAcceptable
+    /// The `HostError` unauthorized access attempt
     case unauthorizedAccessAttempt
 
+    /// Http response status of error
     public var status: HTTPResponseStatus {
         switch self {
         case .notAcceptable:
@@ -37,6 +41,7 @@ public enum HostError: AbortError, DebuggableError {
         }
     }
 
+    /// Reason of error
     public var reason: String {
         switch self {
         case .notAcceptable:
@@ -46,6 +51,7 @@ public enum HostError: AbortError, DebuggableError {
         }
     }
 
+    /// Identifier of error
     public var identifier: String {
         switch self {
         case .notAcceptable:

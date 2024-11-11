@@ -16,7 +16,7 @@
 //  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 //
-//  Application+Extensions.swift.swift
+//  Application+Extensions.swift
 //
 //
 //  Created by Mykola Buhaiov on 14.06.2024.

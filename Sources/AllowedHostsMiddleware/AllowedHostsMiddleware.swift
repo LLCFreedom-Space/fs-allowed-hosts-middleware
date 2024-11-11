@@ -28,12 +28,14 @@ import Vapor
 public struct AllowedHostsMiddleware: AsyncMiddleware {
     /// Initialize middleware
     public init() {}
-
-    ///  "AllowedHostsMiddleware": It checks if the incoming request's IP address is identifiable and permitted based on a predefined list of allowed hosts.
+    /// Responds to an incoming request by validating allow host and checking if this host has access.
     /// - Parameters:
-    ///   - request: The incoming `Request`.
+    ///   - request: The incoming request that contains internet protocol address.
     ///   - next: Next `Responder` in the chain, potentially another middleware or the main router.
-    /// - Returns: allowed response with a correct IP address
+    /// - Throws:
+    ///   - `HostError.notAcceptable` if the ip address is missing.
+    ///   - `HostError.unauthorizedAccessAttempt` if the ip address not allow to get access.
+    /// - Returns: A `Response` object resulting from processing the request.
     public func respond(to request: Request, chainingTo next: AsyncResponder) async throws -> Response {
         request.logger.debug("IpAddress headers - \(String(describing: request.headers))")
         guard let ipAddress = request.remoteAddress?.ipAddress else {

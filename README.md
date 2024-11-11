@@ -9,7 +9,19 @@
  
 # FS Allowed Hosts Middleware
 
-Quick implementation of allowed hosts middleware.
+The Allowed Hosts Middleware setting is essential for security. It helps prevent HTTP Host header attacks, where a malicious user might send requests with a fake Host header to trick the server or access it under unintended domain names.
+Here's why Allowed Hosts Middleware is important:
+## Host Header Protection:
+The Host header in HTTP requests is typically used to determine which domain a user is trying to access.
+By validating this header against HOSTS, ensures that the request is coming from a trusted source.
+## Security Against DNS Rebinding:
+If a web application does not restrict the hostnames it serves, attackers could exploit it through techniques like DNS rebinding to bypass security boundaries. HOSTS helps prevent these attacks by only allowing requests from explicitly trusted domains.
+## Error Prevention:
+If a request is made with an unexpected Host header, raises a 406 NotAcceptable error.
+If a request is made with an untrusted Host header, raises a 401 Unauthorized error.
+This provides an extra layer of security and reliability by ensuring the application only serves traffic for intended hosts.
+## How It Works
+While HOSTS is not a middleware itself, it's checked at an early stage request-handling process, before most middleware is even executed. When receives a request, it compares the Host header against HOSTS. If there’s no match, the request is rejected.
 
 ## Swift version
 
