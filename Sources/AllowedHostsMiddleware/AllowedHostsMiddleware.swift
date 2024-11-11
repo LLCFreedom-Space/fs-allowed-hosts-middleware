@@ -42,7 +42,7 @@ public struct AllowedHostsMiddleware: AsyncMiddleware {
         }
         if !request.application.allowedHosts.contains(ipAddress) {
             request.application.logger.error("Unauthorized access attempt from IP address: \(ipAddress)")
-            throw HostError.unauthorizedAccessAttempt(ipAddress: ipAddress)
+            throw HostError.unauthorizedAccessAttempt
         }
         return try await next.respond(to: request)
     }

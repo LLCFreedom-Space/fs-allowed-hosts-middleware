@@ -8,6 +8,7 @@ final class AllowedHostsMiddlewareTests: XCTestCase {
     var app: Application!
     //  swiftlint: enable implicitly_unwrapped_optional
     let port = 8080
+    let hostname = "127.0.0.1"
 
     override func setUp() async throws {
         app = try await Application.make(.testing)
@@ -22,8 +23,8 @@ final class AllowedHostsMiddlewareTests: XCTestCase {
 
     func testSuccess() throws {
         app.middleware.use(AllowedHostsMiddleware())
-        app.allowedHosts = ["127.0.0.1"]
-        try app.testable(method: .running(hostname: "127.0.0.1", port: port)).test(.GET, "/order") { res in
+        app.allowedHosts = [hostname]
+        try app.testable(method: .running(hostname: hostname, port: port)).test(.GET, "/order") { res in
             XCTAssertEqual(res.status, .ok)
             XCTAssertEqual(res.body.string, "done")
         }
@@ -31,7 +32,7 @@ final class AllowedHostsMiddlewareTests: XCTestCase {
 
     func testNotAcceptable() throws {
         app.middleware.use(AllowedHostsMiddleware())
-        app.allowedHosts = ["127.0.0.1"]
+        app.allowedHosts = [hostname]
         try app.testable().test(.GET, "/order") { res in
             XCTAssertEqual(res.status, .notAcceptable)
         }
@@ -40,7 +41,7 @@ final class AllowedHostsMiddlewareTests: XCTestCase {
     func testUnauthorized() throws {
         app.middleware.use(AllowedHostsMiddleware())
         app.allowedHosts = ["example.com"]
-        try app.testable(method: .running(hostname: "127.0.0.1", port: port)).test(.GET, "/order") { res in
+        try app.testable(method: .running(hostname: hostname, port: port)).test(.GET, "/order") { res in
             XCTAssertEqual(res.status, .unauthorized)
         }
     }

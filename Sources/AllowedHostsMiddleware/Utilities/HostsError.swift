@@ -26,7 +26,7 @@ import Vapor
 
 public enum HostError: AbortError, DebuggableError {
     case notAcceptable
-    case unauthorizedAccessAttempt(ipAddress: String)
+    case unauthorizedAccessAttempt
 
     public var status: HTTPResponseStatus {
         switch self {
