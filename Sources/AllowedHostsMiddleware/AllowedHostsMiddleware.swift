@@ -39,12 +39,17 @@ public struct AllowedHostsMiddleware: AsyncMiddleware {
     public func respond(to request: Request, chainingTo next: AsyncResponder) async throws -> Response {
         request.logger.debug("IpAddress headers - \(String(describing: request.headers))")
         guard let ipAddress = request.remoteAddress?.ipAddress else {
-            request.application.logger.error("Access attempt without an authorized IP address")
+            request.application.logger.error("Access attempt without an authorized IP address. IP address: \(String(describing: request.remoteAddress?.ipAddress))")
             throw HostError.notAcceptable
         }
-        if !request.application.allowedHosts.contains(ipAddress) {
-            request.application.logger.error("Unauthorized access attempt from IP address: \(ipAddress)")
-            throw HostError.unauthorizedAccessAttempt
+        let parts = ipAddress.split(separator: ".")
+        let prefix = parts.dropLast().joined(separator: ".")
+        request.application.logger.debug("Prefix of IP address: \(prefix)")
+        for allowedHost in request.application.allowedHosts {
+            guard allowedHost.hasPrefix(prefix) else {
+                request.application.logger.error("Unauthorized access attempt from IP address: \(ipAddress)")
+                throw HostError.unauthorizedAccessAttempt
+            }
         }
         return try await next.respond(to: request)
     }

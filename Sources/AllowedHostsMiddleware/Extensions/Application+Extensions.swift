@@ -24,15 +24,25 @@
 
 import Vapor
 
-/// Extension for core type representing a Vapor application.
 extension Application {
+    /// Stores and manages a list of allowed hostnames for the application.
+    /// This extension adds a typed storage property `allowedHosts` to the `Application`
+    /// instance. It uses Vapor's `StorageKey` mechanism to safely store and retrieve
+    /// an array of allowed hostnames, typically used for validating incoming requests
+    /// or enforcing CORS/security rules. If the value is not found in storage, an
+    /// error is logged and an empty array is returned.
     /// A `AllowedHostsKey` conform to StorageKey protocol
     private struct AllowedHostsKey: StorageKey {
         /// Less verbose typealias for `[String]`.
         typealias Value = [String]
     }
 
-    /// Setup `allowedHosts` in application storage
+    /// Gets or sets the list of allowed hosts for the application.
+    /// Accesses an array of strings representing allowed hostnames stored
+    /// in the application's storage. If accessed before a value is set,
+    /// the function logs an error and returns an empty array. Values assigned
+    /// to this property are persisted in `Application.Storage` via the
+    /// `AllowedHostsKey`.
     public var allowedHosts: [String] {
         get {
             guard let allowedHosts = storage[AllowedHostsKey.self] else {
