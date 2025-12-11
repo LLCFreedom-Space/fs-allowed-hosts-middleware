@@ -6,19 +6,18 @@ on:
   pull_request:
     branches: [ "main" ]
 
-permissions:
-  contents: read
-  security-events: write
-
-# Allow one concurrent scan
+# Allow one concurrent deployment
 concurrency:
-  group: "codeql-scan"
+  group: "scanning"
   cancel-in-progress: true
+
 
 jobs:
   analyze:
-    name: Analyze Swift with CodeQL
-    runs-on: macos-14
+    name: Analyze
+    runs-on: macos-13
+    permissions:
+      security-events: write
 
     strategy:
       fail-fast: false
@@ -26,22 +25,16 @@ jobs:
         language: [ 'swift' ]
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+    - name: Checkout repository
+      uses: actions/checkout@v3
 
-      - name: Cache Swift build artifacts
-        uses: actions/cache@v4
-        with:
-          path: .build
-          key: swift-build-${{ runner.os }}-${{ hashFiles('**/*.swift') }}
+    - name: Initialize CodeQL
+      uses: github/codeql-action/init@v2
+      with:
+        languages: ${{ matrix.language }}
 
-      - name: Initialize CodeQL
-        uses: github/codeql-action/init@v4
-        with:
-          languages: ${{ matrix.language }}
-
-      - name: Build
-        run: swift build --configuration release
-
-      - name: Perform CodeQL Analysis
-        uses: github/codeql-action/analyze@v4
+    - name: Build
+      run: swift build
+    
+    - name: Perform CodeQL Analysis
+      uses: github/codeql-action/analyze@v2
