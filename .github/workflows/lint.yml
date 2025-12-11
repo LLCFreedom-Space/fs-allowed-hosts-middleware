@@ -12,7 +12,5 @@ jobs:
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Switch Xcode 🔄
-        run: sudo xcode-select --switch /Applications/Xcode_15.0.app
       - name: Swift Lint
         run: swiftlint
