@@ -2,15 +2,23 @@ name: Lint code
 
 on: push
 
-# Allow one concurrent deployment
 concurrency:
   group: "linting"
   cancel-in-progress: true
 
 jobs:
   SwiftLint:
-    runs-on: macos-latest
+    runs-on: macos-14
+
     steps:
       - uses: actions/checkout@v4
-      - name: Swift Lint
-        run: swiftlint
+
+      - name: Install SwiftLint (official installer)
+        run: |
+          curl -L https://github.com/realm/SwiftLint/releases/latest/download/portable_swiftlint.zip -o swiftlint.zip
+          unzip swiftlint.zip -d swiftlint_bin
+          sudo mv swiftlint_bin/swiftlint /usr/local/bin/swiftlint
+          sudo chmod +x /usr/local/bin/swiftlint
+
+      - name: Run SwiftLint
+        run: /usr/local/bin/swiftlint --strict
