@@ -40,3 +40,13 @@ let package = Package(
         )
     ]
 )
+
+#if os(macOS)
+// Add the documentation compiler plugin if possible
+package.dependencies.append(
+    .package(url: "https://github.com/lukepistrol/SwiftLintPlugin", from: "0.52.4")
+)
+package.targets.first?.plugins?.append(
+    .plugin(name: "SwiftLint", package: "SwiftLintPlugin")
+)
+#endif

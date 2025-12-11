@@ -13,12 +13,5 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Install SwiftLint (official installer)
-        run: |
-          curl -L https://github.com/realm/SwiftLint/releases/latest/download/portable_swiftlint.zip -o swiftlint.zip
-          unzip swiftlint.zip -d swiftlint_bin
-          sudo mv swiftlint_bin/swiftlint /usr/local/bin/swiftlint
-          sudo chmod +x /usr/local/bin/swiftlint
-
       - name: Run SwiftLint
-        run: /usr/local/bin/swiftlint --strict
+        run: swiftlint --strict
