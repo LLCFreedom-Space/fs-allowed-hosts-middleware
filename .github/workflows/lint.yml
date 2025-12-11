@@ -9,7 +9,7 @@ concurrency:
 
 jobs:
   SwiftLint:
-    runs-on: macOS-13
+    runs-on: macos-latest
     steps:
       - uses: actions/checkout@v4
       - name: Switch Xcode 🔄
