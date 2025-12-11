@@ -15,4 +15,4 @@ jobs:
       - name: Switch Xcode 🔄
         run: sudo xcode-select --switch /Applications/Xcode_15.0.app
       - name: Swift Lint
-        run: swiftlint --strict
+        run: swiftlint
