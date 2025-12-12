@@ -20,7 +20,7 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     - name: Switch Xcode 🔄
-      run: sudo xcode-select --switch /Applications/Xcode_15.0.app
+      run: sudo xcode-select --switch /Applications/Xcode_15.0.1.app
     - name: Test macOS
       run: xcodebuild test -scheme fs-allowed-hosts-middleware -destination "platform=macOS" -enableCodeCoverage YES
     - name: Fetch Coverage
